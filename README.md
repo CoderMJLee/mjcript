@@ -29,4 +29,4 @@
 - ##### Find instance methods for a object, also support RegEx
   ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144357881-1750181543.png)
 
-#### 6. More usage, please refer to `mjcript.js`
+#### 6. More usage, please refer to `mjcript.cy`
