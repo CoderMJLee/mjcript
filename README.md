@@ -24,7 +24,7 @@
 - ##### Get the front view controller
   ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144258318-1930699920.png)
 
-  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144349037-657409933.png)
+  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117150028068-883074678.png)
 
 - ##### Find instance methods for a object, also support RegEx
   ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144357881-1750181543.png)
