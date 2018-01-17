@@ -1,9 +1,7 @@
 # mjcript
 - 基于Cycript实现的一些实用函数
 
-
-
-## Usage
+## 用法
 #### 1. 下载mjcript库
 #### 2. 将`mjcript.cy`文件拖到`/usr/lib/cycript0.9`
 
@@ -18,15 +16,15 @@
 ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144247146-1584055320.png)
 
 #### 5. 使用任何你想使用的功能
-- ##### Some properties
-  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144250849-72214772.png)
+- ##### 一些常用属性
+  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144250849-72214772.png)
 
-- ##### Get the front view controller
-  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144258318-1930699920.png)
+- ##### 拿到显示在最前面的控制器
+  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144258318-1930699920.png)
 
   ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117150028068-883074678.png)
 
-- ##### Find instance methods for a object, also support RegEx
-  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144357881-1750181543.png)
+- ##### 获得某个类的对象方法名列表，支持正则表达式查询
+  ![](https://images2017.cnblogs.com/blog/497279/201801/497279-20180117144357881-1750181543.png)
 
 #### 6. 更多用法，可以打开`mjcript.cy`文件
