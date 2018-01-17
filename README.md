@@ -1,5 +1,5 @@
 # mjcript
-- Some practical functions for cycript
+- 基于Cycript的一些实用的函数
 
 
 
