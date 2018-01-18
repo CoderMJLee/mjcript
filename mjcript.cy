@@ -3,24 +3,16 @@
 	var missingParamStr = 'Missing parameter';
 
 	// app id
-	MJAppId = function() { 
-		return [NSBundle mainBundle].bundleIdentifier; 
-	}();
+	MJAppId = [NSBundle mainBundle].bundleIdentifier;
 
 	// mainBundlePath
-	MJAppPath = function() { 
-		return [NSBundle mainBundle].bundlePath; 
-	}();
+	MJAppPath = [NSBundle mainBundle].bundlePath;
 
 	// document path
-	MJDocPath = function() { 
-		return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]; 
-	}();
+	MJDocPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 
 	// caches path
-	MJCachesPath = function() { 
-		return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]; 
-	}();
+	MJCachesPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]; 
 
 	// 加载系统动态库
 	MJLoadFramework = function(name) {
@@ -28,6 +20,7 @@
 		var foot = "Frameworks/" + name + ".framework";
 		var bundle = [NSBundle bundleWithPath:head + foot] || [NSBundle bundleWithPath:head + "Private" + foot];
   		[bundle load];
+  		return bundle;
 	};
 
 	// keyWindow
@@ -38,11 +31,6 @@
 	// 根控制器
 	MJRootVc =  function() {
 		return UIApp.keyWindow.rootViewController;
-	};
-
-	// 根控制器的子控制器
-	MJRootChildVcs =  function() {
-		return UIApp.keyWindow.rootViewController.childViewControllers;
 	};
 
 	// 找到显示在最前面的控制器
@@ -81,6 +69,12 @@
 
 	MJRectMake = function(x, y, w, h) { 
 		return {0 : MJPointMake(x, y), 1 : MJSizeMake(w, h)}; 
+	};
+
+	// 递归打印controller的层级结构
+	MJChildVcs = function(vc) {
+		if (![vc isKindOfClass:[UIViewController class]]) throw new Error(invalidParamStr);
+		return [vc _printHierarchy].toString();
 	};
 
 	// 递归打印view的层级结构
