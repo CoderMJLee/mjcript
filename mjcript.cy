@@ -1,4 +1,7 @@
 (function(exports) {
+	var invalidParamStr = 'Invalid parameter';
+	var missingParamStr = 'Missing parameter';
+
 	// app id
 	MJAppId = function() { 
 		return [NSBundle mainBundle].bundleIdentifier; 
@@ -54,7 +57,7 @@
 	    	var count = vc.childViewControllers.count;
     		for (var i = count - 1; i >= 0; i--) {
     			var childVc = vc.childViewControllers[i];
-    			if (childVc.view.window) {
+    			if (childVc && childVc.view.window) {
     				vc = _MJFrontVc(childVc);
     				break;
     			}
@@ -82,7 +85,7 @@
 
 	// 递归打印view的层级结构
 	MJSubviews = function(view) { 
-		if (![view isKindOfClass:[UIView class]]) return;
+		if (![view isKindOfClass:[UIView class]]) throw new Error(invalidParamStr);
 		return view.recursiveDescription().toString(); 
 	};
 
@@ -102,9 +105,11 @@
 	};
 
 	var _MJClass = function(className) {
+		if (!className) throw new Error(missingParamStr);
 		if (MJIsString(className)) {
 			return NSClassFromString(className);
 		} 
+		if (!className) throw new Error(invalidParamStr);
 		// 对象或者类
 		return className.class();
 	};
@@ -112,7 +117,6 @@
 	// 打印所有的子类
 	MJSubclasses = function(className, reg) {
 		className = _MJClass(className);
-		if (!className) throw new Error('Invalid parameter');
 
 		return [c for each (c in ObjectiveC.classes) 
 		if (c != className 
@@ -125,7 +129,6 @@
 	// 打印所有的方法
 	var _MJGetMethods = function(className, reg, clazz) {
 		className = _MJClass(className);
-		if (!className) throw new Error('Invalid parameter');
 
 		var count = new new Type('I');
 		var classObj = clazz ? className.constructor : className;
@@ -178,8 +181,9 @@
 
 	// 打印所有的成员变量
 	MJIvars = function(obj, reg){ 
+		if (!obj) throw new Error(missingParamStr);
 		var x = {}; 
-		for(i in *obj) { 
+		for(var i in *obj) { 
 			try { 
 				var value = (*obj)[i];
 				if (reg && !reg.test(i) && !reg.test(value)) continue;
@@ -191,8 +195,9 @@
 
 	// 打印所有的成员变量名字
 	MJIvarNames = function(obj, reg) {
+		if (!obj) throw new Error(missingParamStr);
 		var array = [];
-		for(name in *obj) { 
+		for(var name in *obj) { 
 			if (reg && !reg.test(name)) continue;
 			array.push(name);
 		}
