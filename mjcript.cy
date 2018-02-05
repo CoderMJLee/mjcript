@@ -58,6 +58,32 @@
 		return _MJFrontVc(UIApp.keyWindow.rootViewController);
 	};
 
+	// 找到当前在最前面的控制器的 FirstResponder
+	var _MJFirstResponder = function(view) {
+		var subviews = view.subviews();
+		var count = subviews.count;
+		for (var i = 0; i < count; i++) {
+			var view = subviews[i];
+			if (view.isFirstResponder()) {
+				return view;
+			} else {
+				var subCount = view.subviews().count;
+				if (subCount !== 0) {
+					var subview = _MJFirstResponder(view);
+					if (subview !== null) {
+						return subview;
+					}
+				}
+			}
+    	}
+    	return null;
+	}
+
+	MJFirstResponder = function() {
+		var frontView = MJFrontVc().view;
+		return _MJFirstResponder(frontView);
+	}
+
 	// CG函数
 	MJPointMake = function(x, y) { 
 		return {0 : x, 1 : y}; 
