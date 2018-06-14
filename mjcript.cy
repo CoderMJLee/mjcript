@@ -54,8 +54,33 @@
     	}
 	};
 
-	MJFrontVc =  function() {
+	MJFrontVc = function() {
 		return _MJFrontVc(UIApp.keyWindow.rootViewController);
+	};
+
+	// 递归打印UIViewController view的层级结构
+	MJVcSubviews = function(vc) { 
+		if (![vc isKindOfClass:[UIViewController class]]) throw new Error(invalidParamStr);
+		return vc.view.recursiveDescription().toString(); 
+	};
+
+	// 递归打印最上层UIViewController view的层级结构
+	MJFrontVcSubViews = function() {
+		return MJVcSubviews(_MJFrontVc(UIApp.keyWindow.rootViewController));
+	};
+
+	// 获取按钮绑定的所有TouchUpInside事件的方法名
+	MJBtnTouchUpEvent = function(btn) { 
+		var events = [];
+		var allTargets = btn.allTargets().allObjects()
+		var count = allTargets.count;
+    	for (var i = count - 1; i >= 0; i--) { 
+    		if (btn != allTargets[i]) {
+    			var e = [btn actionsForTarget:allTargets[i] forControlEvent:UIControlEventTouchUpInside];
+    			events.push(e);
+    		}
+    	}
+	   return events;
 	};
 
 	// CG函数
@@ -76,6 +101,9 @@
 		if (![vc isKindOfClass:[UIViewController class]]) throw new Error(invalidParamStr);
 		return [vc _printHierarchy].toString();
 	};
+
+	
+
 
 	// 递归打印view的层级结构
 	MJSubviews = function(view) { 
